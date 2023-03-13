@@ -12,7 +12,7 @@ input.addEventListener('input', throttle(onCountrySearch, DEBOUNCE_DELAY));
 
 
 function onCountrySearch(event) {
-    countries = input.value;
+    const countries = input.value;
     if (countries !== null) {
         API.fetchCountries(countries);
     };
