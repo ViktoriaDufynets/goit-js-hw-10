@@ -9,7 +9,7 @@ function fetchCountries(name) {
     then(response => response.json()).
     then((data) => {
       const allCountriesArray = data.reduce(
-  (acc, country) => acc + `<li class="country">${country.flags.svg} ${country.name.common}</li>`,
+  (acc, country) => acc + `<li class="country">${country.flags.svg} ${country.name.official}</li>`,
   "");
       countryList.innerHTML = allCountriesArray;
       console.log(allCountriesArray);
@@ -20,11 +20,10 @@ function fetchCountries(name) {
       };
       if (data.length === 1) {
         const countryInfo = data.reduce(
-          (acc, country) => acc + `<div class="capital"> Capital: ${country.capital}</div> <div class="population"> Population: ${country.population}</div> <div class="languages"> Languages: ${country.languagues}</div>`,
+          (acc, country) => acc + `<div class="capital"> Capital: ${country.capital}</div> <div class="population"> Population: ${country.population}</div> <div class="languages"> Languages: ${Object.values(country.languages)}</div>`,
           "");
-        countryList.insertAdjacentHTML('beforeend', countryInfo);
-        console.log("LOL");
-        console.log(countryInfo);
+        const countryInfoWithSpaces = countryInfo.replaceAll(",", ", ");
+        countryList.insertAdjacentHTML('beforeend', countryInfoWithSpaces);
       };
     }).
     catch((error) => { Notiflix.Notify.failure(`Oops, there is no country with that name`); }); 
@@ -33,6 +32,10 @@ function fetchCountries(name) {
 countryList.style.listStyle = 'none';
 
 export default { fetchCountries };
+
+
+
+
 
 // const a = document.querySelector(".country");
 // const b = document.querySelector(".capital");

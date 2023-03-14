@@ -4,20 +4,19 @@ import throttle from 'lodash.debounce';
 const DEBOUNCE_DELAY = 300;
 
 const input = document.querySelector('#search-box');
-// const countryList = document.querySelector(".country-list");
+const countryList = document.querySelector(".country-list");
 // const countryInfo = document.querySelector(".country-info");
-
 
 input.addEventListener('input', throttle(onCountrySearch, DEBOUNCE_DELAY));
 
-
 function onCountrySearch(event) {
-    const countries = input.value;
-    if (countries !== null) {
+    const countries = input.value.trim();
+    if (countries) {
         API.fetchCountries(countries);
+    } else {
+        countryList.innerHTML = null;
     };
 };
-onCountrySearch();
 
 
 // const createCountry = (item) => {
