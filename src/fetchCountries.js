@@ -1,4 +1,5 @@
 import Notiflix from 'notiflix';
+import {clearer} from './index';
 export default { fetchCountries };
 
 const BASE_URL = 'https://restcountries.com/v3.1/name/';
@@ -7,8 +8,7 @@ const countryList = document.querySelector(".country-list");
 const countryDiv = document.querySelector(".country-info");
 
 function fetchCountries(name) {
-  countryList.innerHTML = null;
-  countryDiv.innerHTML = null;
+  clearer();
   const url = `${BASE_URL}${name}${PROP_FILTER}`;
   return fetch(url).
     then(response => response.json()).
@@ -27,7 +27,7 @@ function fetchCountries(name) {
 
 const infoMessageTooManyCountries = () => {
   Notiflix.Notify.info(`Too many matches found. Please enter a more specific name.`);
-  countryList.innerHTML = null;
+  clearer();
 };
 
 const error = () => {

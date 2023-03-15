@@ -14,11 +14,13 @@ function onCountrySearch(event) {
     if (countries) {
         API.fetchCountries(countries);
     } else {
-       countryList.innerHTML = null;
-       countryDiv.innerHTML = null;
+        clearer();
     };
 };
 
-
+export function clearer() {
+    countryList.innerHTML = null;
+    countryDiv.innerHTML = null;
+};
 
 
