@@ -7,6 +7,7 @@ const countryList = document.querySelector(".country-list");
 const countryDiv = document.querySelector(".country-info");
 
 function fetchCountries(name) {
+  countryList.innerHTML = null;
   countryDiv.innerHTML = null;
   const url = `${BASE_URL}${name}${PROP_FILTER}`;
   return fetch(url).
