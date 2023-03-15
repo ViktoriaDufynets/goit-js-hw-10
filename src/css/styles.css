@@ -54,8 +54,24 @@ body {
 .capital, .population, .languages {
   color: rgb(245, 242, 67);
   font-size: 16px;
-
+  animation: favor 3s 1;
 }
+
+@keyframes favor {
+  0% {
+    color: transparent;
+    margin: 40px;
+  }
+
+  30% {
+    color: transparent;
+    margin: 40px;
+  }
+  80% {
+    margin: 40px;
+  }
+}
+
 
 .capital-info,
 .population-info,
