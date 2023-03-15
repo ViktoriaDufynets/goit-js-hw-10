@@ -7,6 +7,7 @@ const countryList = document.querySelector(".country-list");
 const countryDiv = document.querySelector(".country-info");
 
 function fetchCountries(name) {
+  countryDiv.innerHTML = null;
   const url = `${BASE_URL}${name}${PROP_FILTER}`;
   return fetch(url).
     then(response => response.json()).
@@ -19,9 +20,18 @@ function fetchCountries(name) {
         createCountryInfo(data);
       };
     }).
-    catch((error) => { Notiflix.Notify.failure(`Oops, there is no country with that name`); }); 
+    catch(error); 
 };
 
+
+const infoMessageTooManyCountries = () => {
+  Notiflix.Notify.info(`Too many matches found. Please enter a more specific name.`);
+  countryList.innerHTML = null;
+};
+
+const error = () => {
+  Notiflix.Notify.failure(`Oops, there is no country with that name`);
+};
 
 const createCountryList = (data) => {
   const allCountriesArray = data.reduce(
@@ -37,11 +47,6 @@ const createCountryList = (data) => {
   countryList.innerHTML = allCountriesArray;
 };
 
-const infoMessageTooManyCountries = () => {
-  Notiflix.Notify.info(`Too many matches found. Please enter a more specific name.`);
-  countryList.innerHTML = null;
-};
-
 const createCountryInfo = (data) => {
   const countryInfo = data.reduce(
     (acc, country) => acc +
@@ -52,6 +57,9 @@ const createCountryInfo = (data) => {
   const countryInfoWithSpaces = countryInfo.replaceAll(",", ", ");
   countryDiv.innerHTML = countryInfoWithSpaces;
 };
+
+
+
 
 
 
